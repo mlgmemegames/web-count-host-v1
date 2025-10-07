@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>You are visitor</h2>
+<p>number<span id="count">Loading...</span></p>
+
+<script>
+fetch("https://api.countapi.xyz/hit/sites.google.com-view-youraveragememeguy-home/visits")
+  .then(r => r.json())
+  .then(d => document.getElementById("count").innerText = d.value);
+</script>
+
+</body>
+</html>
