@@ -1,7 +1,65 @@
-<div style="text-align:center; margin-top:50px;">
-  <h2 style="font-family: 'Courier New', monospace;">Visitor Counter</h2>
-  <iframe 
-    src="https://countapi.xyz/hit/memeguycounter/visits" 
-    style="border:none; width:100px; height:30px;">
-  </iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Retro 7-Segment Visitor Counter</title>
+<style>
+  body {
+    font-family: monospace;
+    background: #000;
+    color: #0F0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+  }
+
+  .counter-container {
+    display: flex;
+    gap: 5px;
+    font-size: 50px;
+    background: #111;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #0F0;
+  }
+
+  .digit {
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+  }
+</style>
+</head>
+<body>
+
+<div class="counter-container">
+  <span class="digit" id="d1">0</span>
+  <span class="digit" id="d2">0</span>
+  <span class="digit" id="d3">0</span>
+  <span class="digit" id="d4">0</span>
 </div>
+
+<script>
+  const counterLabel = "memeguycounter"; // simple label for CountAPI
+
+  function updateDigits(num) {
+    const str = num.toString().padStart(4, '0'); // 4 digits
+    document.getElementById('d1').innerText = str[0];
+    document.getElementById('d2').innerText = str[1];
+    document.getElementById('d3').innerText = str[2];
+    document.getElementById('d4').innerText = str[3];
+  }
+
+  // Fetch current count and increment
+  fetch(`https://api.countapi.xyz/hit/${counterLabel}/visits`)
+    .then(response => response.json())
+    .then(data => updateDigits(data.value))
+    .catch(() => updateDigits(0));
+</script>
+
+</body>
+</html>
