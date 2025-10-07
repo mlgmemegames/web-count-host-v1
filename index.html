@@ -1,14 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visitor Counter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 100px;
+    background: #f0f8ff;
+  }
+
+  .counter-box {
+    display: inline-block;
+    background: #fff;
+    padding: 30px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .counter-box h2 {
+    margin: 0 0 10px;
+    color: #0078d4;
+  }
+
+  .counter-box span {
+    font-size: 2em;
+    color: #ff4500;
+  }
+</style>
+</head>
 <body>
 
-<h2>You are visitor</h2>
-<p>number<span id="count">Loading...</span></p>
+<div class="counter-box">
+  <h2>Visitor Counter</h2>
+  <p>Visits: <span id="count">0</span></p>
+</div>
 
 <script>
-fetch("https://api.countapi.xyz/hit/sites.google.com-view-youraveragememeguy-home/visits")
-  .then(r => r.json())
-  .then(d => document.getElementById("count").innerText = d.value);
+  // Fetch the visitor count from CountAPI
+  fetch("https://api.countapi.xyz/hit/sites.google.com-view-youraveragememeguy-home/visits")
+    .then(response => response.json())
+    .then(data => {
+      // Update the span with id="count"
+      document.getElementById("count").innerText = data.value;
+    })
+    .catch(() => {
+      // Fallback in case the API fails
+      document.getElementById("count").innerText = "N/A";
+    });
 </script>
 
 </body>
