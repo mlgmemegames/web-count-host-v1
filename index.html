@@ -38,15 +38,16 @@
 </div>
 
 <script>
-  // Fetch the visitor count from CountAPI
-  fetch("https://api.countapi.xyz/hit/sites.google.com-view-youraveragememeguy-home/visits")
+  // Use a simple label instead of full Google Sites URL
+  const counterLabel = "youraveragememeguy-home";
+
+  // Fetch visitor count from CountAPI
+  fetch(`https://api.countapi.xyz/hit/${counterLabel}/visits`)
     .then(response => response.json())
     .then(data => {
-      // Update the span with id="count"
       document.getElementById("count").innerText = data.value;
     })
     .catch(() => {
-      // Fallback in case the API fails
       document.getElementById("count").innerText = "N/A";
     });
 </script>
